@@ -1,0 +1,7 @@
+class Exceptions
+{
+  public static function UserExists()
+  {
+    return new Exception("User Already Exists", 1);
+  }
+}

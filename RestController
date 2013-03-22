@@ -1,0 +1,30 @@
+<?php
+
+  require_once("XML/Serializer.php");
+  require_once("RestUtils.php");
+  require_once("RestRequest.php");
+
+  class RestController()
+  {
+
+    protected function ResponseJSON($data) 
+    {
+      RestUtils::sendResponse(200, json_encode($data), 'application/json');
+    }
+
+    protected function XMLResponse()
+    {
+      // using the XML_SERIALIZER Pear Package
+      $options = array
+      (
+	'indent' => '    ',
+	'addDecl' => false,
+	//'rootName' => $fc->getAction(), XML_SERIALIZER_OPTION_RETURN_RESULT => true
+      ); 
+      $serializer = new XML_Serializer(); 
+      $serializer->serialize( $user->getArray() );
+      RestUtils::sendResponse(200, $serializer->getSerializedData(), 'application/xml');	
+    }
+  }
+
+?>
